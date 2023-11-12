@@ -5,6 +5,7 @@
   </a>
   <div class="nav-links">
     <a href="/">Home</a>
+    <a href="/blog/edit">New Blog</a>
     <a href="/about">About</a>
 
     <a href="/admin">admin</a>

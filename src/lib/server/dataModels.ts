@@ -1,10 +1,9 @@
 import { sql } from "@vercel/postgres";
 
-export async function createTableConfig() {
+export async function createTableBlog() {
   await sql`
-        CREATE TABLE IF NOT EXISTS config (
-            version VARCHAR (16) NOT NULL,
-            root_password VARCHAR (256) NOT NULL
+        CREATE TABLE IF NOT EXISTS BO_BLOGS (
+            ...
         );`;
 }
 
@@ -32,8 +31,8 @@ export async function createTableArticles() {
             title VARCHAR (256) NOT NULL,
             content TEXT,
             created_at DATE DEFAULT NOW (),
-            author_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
             image_url VARCHAR
+            
         );`;
 }
 
