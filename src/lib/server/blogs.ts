@@ -21,4 +21,27 @@ export async function saveBlog(data: Blog) {
   console.log(`save to db: ${data}}]`);
 
   //return await sql`Insert into Blog (title, author, ...) values (${data.title}, ${data.author}, ...) return ID;`;
+
+  return await sql`
+  INSERT INTO blogs (title, author, date, content, media_type, media_url)
+  VALUES (${data.title}, ${data.author}, ${data.date}, ${data.content}, ${data.media.type}, ${data.media.url})
+  RETURNING id;`;
+}
+
+export async function createTableBlogs() {
+  await sql`
+    CREATE TABLE IF NOT EXISTS blogs (
+      
+      id SERIAL PRIMARY KEY,
+      title VARCHAR(255) NOT NULL,
+      author VARCHAR(255) NOT NULL,
+      date DATE NOT NULL,
+      content TEXT NOT NULL,
+      media JSONB,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+}
+export async function dropTableBlogs() {
+  await sql`DROP TABLE IF EXISTS blogs CASCADE;`;
 }

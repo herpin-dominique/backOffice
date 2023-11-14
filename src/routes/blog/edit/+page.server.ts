@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { superValidate } from "sveltekit-superforms/server";
-import { BlogSchema } from "$lib/server/blogs.js";
+import { BlogSchema } from "$lib/server/blogs";
 import { fail } from "@sveltejs/kit";
-import { saveBlog } from "$lib/server/blogs.js";
+import { saveBlog } from "$lib/server/blogs";
 
 export const load = async () => {
   // Server API:
@@ -19,20 +19,36 @@ export const actions = {
 
     console.log(`abandonner l'article ${articleId}`);
   },
-  publier: async () => {
-    console.log("publier");
+  publier: async ({ request }) => {
+    const form = await superValidate(request, BlogSchema);
+
+    // Convenient validation check:
+    if (!form.valid) {
+      // Handle validation errors
+      console.error(form);
+      return fail(400, { form });
+    }
+
+    // Do something with the validated form.data
+    saveBlog(form.data);
+
+    // Additional logic for publishing...
+    console.log("Publication réussie");
+
+    // Return { form } here if needed
+    return { form };
   },
   sauvegarder: async ({ request }) => {
     const form = await superValidate(request, BlogSchema);
 
     // Convenient validation check:
     if (!form.valid) {
-      // Again, return { form } and things will just work.
+      // Handle validation errors
       console.error(form);
       return fail(400, { form });
     }
 
-    // TODO: Do something with the validated form.data
+    // Do something with the validated form.data
     saveBlog(form.data);
 
     // Yep, return { form } here too
