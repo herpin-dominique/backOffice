@@ -1,14 +1,11 @@
 import { sveltekit } from "@sveltejs/kit/vite";
-import { defineConfig } from "vite";
-import path from "path";
+import { defineConfig, loadEnv } from "vite";
 
-export default defineConfig({
-  plugins: [sveltekit()],
-  resolve: {
-    alias: {
-      // Ajoutez des alias pour vos chemins ici
-      "@lib": path.resolve(__dirname, "src/lib"),
-      // ...
-    },
-  },
-});
+/** @type {import('vite').UserConfig} */
+export default ({ mode }: { mode: string }) => {
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
+
+  return defineConfig({
+    plugins: [sveltekit()],
+  });
+};
