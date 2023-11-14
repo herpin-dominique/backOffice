@@ -9,10 +9,10 @@ export const BlogSchema = z.object({
   author: z.string().min(1),
   date: z.string(),
   content: z.string().min(1),
-  media: z.object({
-    type: z.union([z.literal("image"), z.literal("video")]),
-    url: z.string().url(),
-  }),
+  // media: z.object({
+  //   type: z.union([z.literal("image"), z.literal("video")]),
+  //   url: z.string().url(),
+  // }),
 });
 
 export type Blog = z.infer<typeof BlogSchema>;
@@ -23,14 +23,14 @@ export async function saveBlog(data: Blog) {
   //return await sql`Insert into Blog (title, author, ...) values (${data.title}, ${data.author}, ...) return ID;`;
 
   return await sql`
-  INSERT INTO blogs (title, author, date, content, media_type, media_url)
-  VALUES (${data.title}, ${data.author}, ${data.date}, ${data.content}, ${data.media.type}, ${data.media.url})
+  INSERT INTO bo_blogs (title, author, date, content)
+  VALUES (${data.title}, ${data.author}, ${data.date}, ${data.content})
   RETURNING id;`;
 }
 
 export async function createTableBlogs() {
   await sql`
-    CREATE TABLE IF NOT EXISTS blogs (
+    CREATE TABLE IF NOT EXISTS bo_blogs (
       
       id SERIAL PRIMARY KEY,
       title VARCHAR(255) NOT NULL,
@@ -43,5 +43,5 @@ export async function createTableBlogs() {
   `;
 }
 export async function dropTableBlogs() {
-  await sql`DROP TABLE IF EXISTS blogs CASCADE;`;
+  await sql`DROP TABLE IF EXISTS bo_blogs CASCADE;`;
 }

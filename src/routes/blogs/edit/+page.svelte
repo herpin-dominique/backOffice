@@ -31,17 +31,6 @@
     Article :
     <textarea name="article" bind:value={$form.content} />
   </label>
-  <label>
-    URL du média :
-    <input name="media.url" type="text" bind:value={$form.media.url} />
-  </label>
-  <label>
-    Type du média :
-    <select name="media.type" bind:value={$form.media.type}>
-      <option value="image">image</option>
-      <option value="video">video</option>
-    </select>
-  </label>
 
   <button formaction="?/sauvegarder">sauvegarder</button>
   <button formaction="?/publier">publier</button>

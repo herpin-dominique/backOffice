@@ -20,23 +20,7 @@ export const actions = {
     console.log(`abandonner l'article ${articleId}`);
   },
   publier: async ({ request }) => {
-    const form = await superValidate(request, BlogSchema);
-
-    // Convenient validation check:
-    if (!form.valid) {
-      // Handle validation errors
-      console.error(form);
-      return fail(400, { form });
-    }
-
-    // Do something with the validated form.data
-    saveBlog(form.data);
-
-    // Additional logic for publishing...
-    console.log("Publication réussie");
-
-    // Return { form } here if needed
-    return { form };
+    console.log("publier");
   },
   sauvegarder: async ({ request }) => {
     const form = await superValidate(request, BlogSchema);
@@ -49,7 +33,7 @@ export const actions = {
     }
 
     // Do something with the validated form.data
-    saveBlog(form.data);
+    await saveBlog(form.data);
 
     // Yep, return { form } here too
     return { form };
