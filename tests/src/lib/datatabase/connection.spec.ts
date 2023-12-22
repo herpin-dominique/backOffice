@@ -1,4 +1,4 @@
-import { sql } from '$lib/server/database/connection';
+import { sql } from '$lib/server/database';
 
 describe('connectiity spec', () => {
 	it('should able to select text value', async () => {

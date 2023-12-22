@@ -1,4 +1,4 @@
-import { generateAuthentationDDL } from './schemas/authentication';
+import { generateAuthentationDDL } from './schemas';
 import { formatSQL } from './formatter';
 import fs from 'fs';
 
@@ -8,14 +8,9 @@ export async function generateSqlScripts() {
 	if (fs.existsSync(scriptDir)) fs.rmSync(scriptDir, { recursive: true });
 	fs.mkdirSync(scriptDir);
 
-	const env_prefixs = {
-		production: 'prd',
-		development: 'dev'
-	};
-
 	// pack all DDL data
 	const ddl: Record<string, string> = {
-		authentication: generateAuthentationDDL(env_prefixs[import.meta.env.MODE])
+		authentication: generateAuthentationDDL()
 	};
 
 	// create a file for each DDL key in sql script directory

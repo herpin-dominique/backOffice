@@ -11,12 +11,11 @@
 		"test:unit": "vitest --config vitest.config.unit.ts",
 		"test:integration": "vitest --config vitest.config.integration.ts",
 		"test:browser": "playwright test",
-		"build:create-db-scripts-dev": "vite-node --mode development src-database/index.ts create-sql-scripts",
-		"build:create-db-scripts-prd": "vite-node --mode production src-database/index.ts create-sql-scripts",
-		"build:create-db-docker-image": "vite-node src-database/index.ts create-docker-image",
-		"build:docker-image": "npm run build:create-db-scripts-dev && npm run build:create-db-docker-image",
-		"docker:db-start": "docker run --rm --name snd-backoffice-db-dev --env-file ./.env.development.local -p 5432:5432 -d snd-backoffice-db-dev",
-		"docker:db-stop": "docker stop snd-backoffice-db-dev"
+		"db:create-scripts-dev": "vite-node --mode development src-database/index.ts create-sql-scripts",
+		"db:create-scripts-prd": "vite-node --mode production src-database/index.ts create-sql-scripts",
+		"db:create-docker-image": "npm run db:create-scripts-dev && vite-node src-database/index.ts create-docker-image",
+		"db:docker-start": "docker run --rm --name snd-backoffice-db-dev --env-file ./.env.development.local -p 5432:5432 -d snd-backoffice-db-dev",
+		"db:docker-stop": "docker stop snd-backoffice-db-dev"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.40.1",
