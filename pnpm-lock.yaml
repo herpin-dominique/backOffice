@@ -35,6 +35,9 @@ devDependencies:
   jsdom:
     specifier: ^23.0.1
     version: 23.0.1
+  postgres:
+    specifier: ^3.4.3
+    version: 3.4.3
   prettier:
     specifier: 3.1.0
     version: 3.1.0
@@ -2024,6 +2027,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       xtend: 4.0.2
+    dev: true
+
+  /postgres@3.4.3:
+    resolution: {integrity: sha512-iHJn4+M9vbTdHSdDzNkC0crHq+1CUdFhx+YqCE+SqWxPjm+Zu63jq7yZborOBF64c8pc58O5uMudyL1FQcHacA==}
+    engines: {node: '>=12'}
     dev: true
 
   /prettier-plugin-sql@0.18.0(prettier@3.1.0):

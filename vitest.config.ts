@@ -1,11 +1,12 @@
 import { defineConfig } from 'vitest/config';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { loadEnv } from 'vite';
 
-export default defineConfig({
-	plugins: [svelte({ hot: !process.env.VITEST })],
-	test: {
-		globals: true,
-		environment: 'jsdom',
-		setupFiles: ['./vitest-setup.ts']
-	}
-});
+export default ({ mode }: { mode: string }) => {
+	process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
+
+	return defineConfig({
+		test: {
+			globals: true
+		}
+	});
+};
