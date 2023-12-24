@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@lucia-auth/adapter-postgresql':
+    specifier: ^2.0.2
+    version: 2.0.2(lucia@2.7.6)(postgres@3.4.3)
   '@playwright/test':
     specifier: ^1.40.1
     version: 1.40.1
@@ -35,6 +38,9 @@ devDependencies:
   jsdom:
     specifier: ^23.0.1
     version: 23.0.1
+  lucia:
+    specifier: ^2.7.6
+    version: 2.7.6
   postgres:
     specifier: ^3.4.3
     version: 3.4.3
@@ -363,6 +369,22 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
+    dev: true
+
+  /@lucia-auth/adapter-postgresql@2.0.2(lucia@2.7.6)(postgres@3.4.3):
+    resolution: {integrity: sha512-gQ7SlFu+gxQj2IX2J8ZVivcLBbdnf9SbNQOVWkJxZOdY1uaaIQGeNfEDld2Awy02VrXmA4sjHsbkJx1JPVw2+A==}
+    peerDependencies:
+      lucia: ^2.0.0
+      pg: ^8.8.0
+      postgres: ^3.3.0
+    peerDependenciesMeta:
+      pg:
+        optional: true
+      postgres:
+        optional: true
+    dependencies:
+      lucia: 2.7.6
+      postgres: 3.4.3
     dev: true
 
   /@neondatabase/serverless@0.6.0:
@@ -1709,6 +1731,10 @@ packages:
     resolution: {integrity: sha512-zSMINGVYkdpYSOBmLi0D1Uo7JU9nVdQKrHxC8eYlV+9YKK9WePqAlL7lSlorG/U2Fw1w0hTBmaa/jrQ3UbPHtA==}
     dependencies:
       get-func-name: 2.0.2
+    dev: true
+
+  /lucia@2.7.6:
+    resolution: {integrity: sha512-xyRkNtevf0DUM4nGC6F2nCFFNphZ1qqBrfWwAgPa9zkpQsVJ/hN32I8zAY+pm+ZKWPPS/C/Sqqmo2LreSCzg7w==}
     dev: true
 
   /lz-string@1.5.0:

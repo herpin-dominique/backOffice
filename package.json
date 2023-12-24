@@ -14,10 +14,11 @@
 		"db:create-scripts-dev": "vite-node --mode development src-database/index.ts create-sql-scripts",
 		"db:create-scripts-prd": "vite-node --mode production src-database/index.ts create-sql-scripts",
 		"db:create-docker-image": "npm run db:create-scripts-dev && vite-node src-database/index.ts create-docker-image",
-		"db:docker-start": "docker run --rm --name snd-backoffice-db-dev --env-file ./.env.development.local -p 5432:5432 -d snd-backoffice-db-dev",
-		"db:docker-stop": "docker stop snd-backoffice-db-dev"
+		"db:start": "docker run --rm --name snd-backoffice-db-dev --env-file ./.env.development.local -p 5432:5432 -d snd-backoffice-db-dev",
+		"db:stop": "docker stop snd-backoffice-db-dev"
 	},
 	"devDependencies": {
+		"@lucia-auth/adapter-postgresql": "^2.0.2",
 		"@playwright/test": "^1.40.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.3",
@@ -28,6 +29,7 @@
 		"@vercel/postgres": "^0.5.1",
 		"@vitest/ui": "^1.0.4",
 		"jsdom": "^23.0.1",
+		"lucia": "^2.7.6",
 		"postgres": "^3.4.3",
 		"prettier": "3.1.0",
 		"prettier-plugin-sql": "^0.18.0",
