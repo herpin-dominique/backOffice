@@ -38,6 +38,9 @@ devDependencies:
   jsdom:
     specifier: ^23.0.1
     version: 23.0.1
+  libphonenumber-js:
+    specifier: ^1.10.52
+    version: 1.10.52
   lucia:
     specifier: ^2.7.6
     version: 2.7.6
@@ -1705,6 +1708,10 @@ packages:
   /kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
+    dev: true
+
+  /libphonenumber-js@1.10.52:
+    resolution: {integrity: sha512-6vCuCHgem+OW1/VCAKgkasfegItCea8zIT7s9/CG/QxdCMIM7GfzbEBG5d7lGO3rzipjt5woOQL3DiHa8Fy78Q==}
     dev: true
 
   /local-pkg@0.5.0:

@@ -29,6 +29,7 @@
 		"@vercel/postgres": "^0.5.1",
 		"@vitest/ui": "^1.0.4",
 		"jsdom": "^23.0.1",
+		"libphonenumber-js": "^1.10.52",
 		"lucia": "^2.7.6",
 		"postgres": "^3.4.3",
 		"prettier": "3.1.0",
