@@ -7,10 +7,9 @@ import { POSTGRES_HOST } from '$env/static/private';
 
 export const auth = lucia({
 	env: import.meta.env.PROD ? 'PROD' : 'DEV',
-	adapter:
-		POSTGRES_HOST === 'localhost'
-			? postgres(sql, AuthenticationTables)
-			: pg(db, AuthenticationTables),
+	adapter: POSTGRES_HOST.match(/localhost/i)
+		? postgres(sql, AuthenticationTables)
+		: pg(db, AuthenticationTables),
 	middleware: sveltekit(),
 	getUserAttributes: (databaseUser) => {
 		return {
@@ -20,6 +19,8 @@ export const auth = lucia({
 		};
 	}
 });
+
+console.log(POSTGRES_HOST);
 
 export type Auth = typeof auth;
 export { type AuthRequest, LuciaError as AuthError } from 'lucia';
