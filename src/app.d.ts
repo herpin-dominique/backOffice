@@ -4,10 +4,7 @@ declare global {
 	namespace Lucia {
 		type Auth = import('$lib/server/authentication').Auth;
 		type DatabaseUserAttributes = {
-			username: string;
-			email: string;
-			last_name?: string | null;
-			first_name?: string | null;
+			create_at?: Date;
 		};
 		type DatabaseSessionAttributes = {};
 	}

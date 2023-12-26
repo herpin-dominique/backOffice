@@ -13,14 +13,10 @@ export const auth = lucia({
 	middleware: sveltekit(),
 	getUserAttributes: (databaseUser) => {
 		return {
-			username: databaseUser.username,
-			firstname: databaseUser.first_name,
-			lastname: databaseUser.last_name
+			createAt: databaseUser.create_at
 		};
 	}
 });
-
-console.log(POSTGRES_HOST);
 
 export type Auth = typeof auth;
 export { type AuthRequest, LuciaError as AuthError } from 'lucia';
