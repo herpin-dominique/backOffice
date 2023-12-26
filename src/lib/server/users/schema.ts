@@ -11,6 +11,12 @@ const parseDate = (value: unknown) => {
 	return date;
 };
 
+export const passwordValidation = (password: string, context: z.RefinementCtx) => {
+	if (!/[A-Z]/.test(password)) context.addIssue({ code: 'custom', message: 'a least 1 uppercase' });
+	if (!/[a-z]/.test(password)) context.addIssue({ code: 'custom', message: 'a least 1 lowercase' });
+	if (!/[0-9]/.test(password)) context.addIssue({ code: 'custom', message: 'a least 1 digit' });
+};
+
 export const UserProfileSchema = z.object({
 	id: z.string().min(15),
 	createAt: z.preprocess(parseDate, z.date()),
@@ -26,16 +32,7 @@ export const NewRegistrationSchema = UserProfileSchema.omit({
 	id: true,
 	createAt: true
 }).extend({
-	password: z
-		.string()
-		.min(8)
-		.superRefine((password, context) => {
-			if (!/[A-Z]/.test(password))
-				context.addIssue({ code: 'custom', message: 'a least 1 uppercase' });
-			if (!/[a-z]/.test(password))
-				context.addIssue({ code: 'custom', message: 'a least 1 lowercase' });
-			if (!/[0-9]/.test(password)) context.addIssue({ code: 'custom', message: 'a least 1 digit' });
-		})
+	password: z.string().min(8).superRefine(passwordValidation)
 });
 
 export const UpdateUserProfileSchema = UserProfileSchema.omit({

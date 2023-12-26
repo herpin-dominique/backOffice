@@ -1,6 +1,6 @@
 <script>
-	import { page } from '$app/stores';
 	import '../app.pcss';
+	import { page } from '$app/stores';
 	import { DarkMode } from 'flowbite-svelte';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
 </script>
@@ -13,17 +13,21 @@
 		>
 	</NavBrand>
 	<NavHamburger />
-	<NavUl>
-		<NavLi href="/">Dashboard</NavLi>
+	{#if $page.url.pathname !== '/setup'}
+		<NavUl>
+			<NavLi href="/">Dashboard</NavLi>
 
-		<NavLi href="/tbd">Orders</NavLi>
-		<NavLi href="/tbd">Products</NavLi>
-		<NavLi href="/tbd">Destinations</NavLi>
+			<NavLi href="/tbd">Orders</NavLi>
+			<NavLi href="/tbd">Products</NavLi>
+			<NavLi href="/tbd">Destinations</NavLi>
 
-		<NavLi href="/tbd">Blogs</NavLi>
-		<NavLi href="/tbd">Newsletters</NavLi>
-		<NavLi href="/tbd">Contacts</NavLi>
-	</NavUl>
+			<NavLi href="/tbd">Blogs</NavLi>
+			<NavLi href="/tbd">Newsletters</NavLi>
+			<NavLi href="/tbd">Contacts</NavLi>
+
+			<NavLi href="/tbd">Configuration</NavLi>
+		</NavUl>
+	{/if}
 	<DarkMode />
 </Navbar>
 <slot />

@@ -1,9 +1,17 @@
 // src/hooks.server.ts
 import { auth } from '$lib/server/authentication';
-import type { Handle } from '@sveltejs/kit';
+import { isInitialSetup } from '$lib/server/setup';
+import { redirect, type Handle, error } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	// we can pass `event` because we used the SvelteKit middleware
-	event.locals.auth = auth.handleRequest(event);
+	const pathname = event.url.pathname;
+
+	if (isInitialSetup()) {
+		if (pathname !== '/setup') return redirect(307, '/setup');
+	} else {
+		if (pathname === '/setup') return error(404, { message: 'not found' });
+		// check and read session data
+		event.locals.auth = auth.handleRequest(event);
+	}
 	return await resolve(event);
 };
