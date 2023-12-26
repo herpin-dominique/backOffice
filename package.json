@@ -15,7 +15,8 @@
 		"db:create-scripts-prd": "vite-node --mode production src-database/index.ts create-sql-scripts",
 		"db:create-docker-image": "npm run db:create-scripts-dev && vite-node src-database/index.ts create-docker-image",
 		"db:start": "docker run --rm --name snd-backoffice-db-dev --env-file ./.env.development.local -p 5432:5432 -d snd-backoffice-db-dev",
-		"db:stop": "docker stop snd-backoffice-db-dev"
+		"db:stop": "docker stop snd-backoffice-db-dev",
+		"db:restart": "npm run db:stop && npm run db:start"
 	},
 	"devDependencies": {
 		"@lucia-auth/adapter-postgresql": "^2.0.2",
