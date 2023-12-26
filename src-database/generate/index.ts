@@ -1,4 +1,4 @@
-import { generateAuthentationDDL } from './schemas';
+import { generateAuthentationTablesDDL, generateUserTablesDDL } from './schemas';
 import { formatSQL } from './formatter';
 import fs from 'fs';
 
@@ -10,7 +10,8 @@ export async function generateSqlScripts() {
 
 	// pack all DDL data
 	const ddl: Record<string, string> = {
-		authentication: generateAuthentationDDL()
+		authentication: generateAuthentationTablesDDL(),
+		users: generateUserTablesDDL()
 	};
 
 	// create a file for each DDL key in sql script directory

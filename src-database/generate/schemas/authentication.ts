@@ -1,5 +1,12 @@
 /**
- * Authentication and User data
+ * Authentication data
+ *
+ * bo_user table is the account used for login
+ * bo_user_key table hold the user credential
+ * bo_user_session is for storing session data
+ *
+ * NB: this model is from lucia-auth
+ *
  */
 import { resolveEnvTableName } from './resolver';
 
@@ -9,14 +16,11 @@ export const AuthenticationTables = {
 	session: resolveEnvTableName('bo_user_session')
 };
 
-export function generateAuthentationDDL() {
+export function generateAuthentationTablesDDL() {
 	return `
         CREATE TABLE ${AuthenticationTables.user} (
             id TEXT NOT NULL PRIMARY KEY,
-            email TEXT UNIQUE NOT NULL,
-            firstname TEXT NOT NULL,
-            lastname TEXT NOT NULL,
-            phone TEXT NOT NULL
+            create_at DATE NOT NULL DEFAULT CURRENT_DATE
         );
 
         CREATE TABLE ${AuthenticationTables.key} (
