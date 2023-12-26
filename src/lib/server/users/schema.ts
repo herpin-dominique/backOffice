@@ -1,8 +1,19 @@
 import { z } from 'zod';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
-export const UserSchema = z.object({
+const parseDate = (value: unknown) => {
+	if (!(typeof value === 'string' || value instanceof Date)) return undefined;
+	const date = new Date(value);
+
+	if (isNaN(date.getTime())) return undefined; // value is invalid
+	// Reset time to 00:00:00
+	date.setHours(0, 0, 0, 0);
+	return date;
+};
+
+export const UserProfileSchema = z.object({
 	id: z.string().min(15),
+	createAt: z.preprocess(parseDate, z.date()),
 	email: z.string().email(),
 	firstname: z.string().min(1),
 	lastname: z.string().min(1),
@@ -11,8 +22,9 @@ export const UserSchema = z.object({
 	})
 });
 
-export const NewUserSchema = UserSchema.omit({
-	id: true
+export const NewRegistrationSchema = UserProfileSchema.omit({
+	id: true,
+	createAt: true
 }).extend({
 	password: z
 		.string()
@@ -26,6 +38,12 @@ export const NewUserSchema = UserSchema.omit({
 		})
 });
 
-export type NewUser = z.infer<typeof NewUserSchema>;
+export const UpdateUserProfileSchema = UserProfileSchema.omit({
+	id: true
+}).partial();
 
-export type User = z.infer<typeof UserSchema>;
+export type NewRegistration = z.infer<typeof NewRegistrationSchema>;
+
+export type UpdateUserProfile = z.infer<typeof UpdateUserProfileSchema>;
+
+export type UserProfile = z.infer<typeof UserProfileSchema>;

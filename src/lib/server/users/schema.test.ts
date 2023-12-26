@@ -1,7 +1,7 @@
-import { NewUserSchema, type NewUser } from './schema';
+import { NewRegistrationSchema, type NewRegistration } from './schema';
 
-describe('User schema validation', () => {
-	const validUser: NewUser = {
+describe('User Registration validation', () => {
+	const validRegistrationData = {
 		email: 'toto@test.fr',
 		password: '123Joh187',
 		firstname: 'Totoro',
@@ -10,12 +10,12 @@ describe('User schema validation', () => {
 	};
 
 	it('should have no errors with valid data', () => {
-		const validation = NewUserSchema.safeParse(validUser);
+		const validation = NewRegistrationSchema.safeParse(validRegistrationData);
 		expect(validation.success).toBe(true);
 	});
 
 	it('should have errors with invalid email data', () => {
-		const validation = NewUserSchema.safeParse({ ...validUser, email: '' });
+		const validation = NewRegistrationSchema.safeParse({ ...validRegistrationData, email: '' });
 		expect(validation.success).toBe(false);
 
 		// typescript discriminated union
@@ -27,7 +27,7 @@ describe('User schema validation', () => {
 	});
 
 	it('should have error with invalid password complexity', () => {
-		const validation = NewUserSchema.safeParse({ ...validUser, password: '' });
+		const validation = NewRegistrationSchema.safeParse({ ...validRegistrationData, password: '' });
 		expect(validation.success).toBe(false);
 
 		// typescript discriminated union
@@ -44,7 +44,11 @@ describe('User schema validation', () => {
 	});
 
 	it('should have errors with empty names', () => {
-		const validation = NewUserSchema.safeParse({ ...validUser, firstname: '', lastname: '' });
+		const validation = NewRegistrationSchema.safeParse({
+			...validRegistrationData,
+			firstname: '',
+			lastname: ''
+		});
 		expect(validation.success).toBe(false);
 
 		// typescript discriminated union
