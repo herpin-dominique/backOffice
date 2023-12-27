@@ -1,12 +1,15 @@
 import { buildImage } from './docker-build';
 import { generateSqlScripts } from './generate';
+import { createTables, dropTables } from './vercel/drop-tables';
 
 /**
  * Task resolution mapper
  */
 const tasks = {
 	'create-sql-scripts': async () => await generateSqlScripts(),
-	'create-docker-image': async () => await buildImage()
+	'create-docker-image': async () => await buildImage(),
+	'drop-tables': async () => await dropTables(),
+	'create-tables': async () => await createTables()
 };
 const command = process.argv[process.argv.length - 1];
 
