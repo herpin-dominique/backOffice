@@ -18,7 +18,7 @@
 	export let data;
 	export let form;
 
-	let username = data.session?.user.userId;
+	$: username = data.session?.user.userId;
 </script>
 
 <Navbar fluid>
