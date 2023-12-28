@@ -10,7 +10,8 @@
 		NavHamburger,
 		Button,
 		Dropdown,
-		DropdownItem
+		DropdownItem,
+		DropdownDivider
 	} from 'flowbite-svelte';
 	import { UserOutline } from 'flowbite-svelte-icons';
 	import Logout from './(authentication)/logout/Logout.svelte';
@@ -37,7 +38,8 @@
 					{username}
 				</Button>
 				<Dropdown class="w-40">
-					<DropdownItem>Profile</DropdownItem>
+					<DropdownItem><a href="/profile">Profile</a></DropdownItem>
+					<DropdownDivider />
 					<DropdownItem><Logout {form} /></DropdownItem>
 				</Dropdown>
 			{/if}
@@ -47,15 +49,15 @@
 		<NavUl>
 			<NavLi href="/">Dashboard</NavLi>
 
-			<NavLi href="/tbd">Orders</NavLi>
-			<NavLi href="/tbd">Products</NavLi>
-			<NavLi href="/tbd">Destinations</NavLi>
+			<NavLi href="/orders">Orders</NavLi>
+			<NavLi href="/products">Products</NavLi>
+			<NavLi href="/destinations">Destinations</NavLi>
 
-			<NavLi href="/tbd">Blogs</NavLi>
-			<NavLi href="/tbd">Newsletters</NavLi>
-			<NavLi href="/tbd">Contacts</NavLi>
+			<NavLi href="/blogs">Blogs</NavLi>
+			<NavLi href="/newsletter">Newsletter</NavLi>
+			<NavLi href="/contacts">Contacts</NavLi>
 
-			<NavLi href="/tbd">Configuration</NavLi>
+			<NavLi href="/configuration">Configuration</NavLi>
 		</NavUl>
 	{/if}
 </Navbar>
