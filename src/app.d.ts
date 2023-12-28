@@ -13,6 +13,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			auth: import('$lib/server/authentication').AuthRequest;
+			session: import('$lib/server/authentication').Session | null;
 		}
 		// interface PageData {}
 		// interface Platform {}

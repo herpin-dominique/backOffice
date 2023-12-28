@@ -20,34 +20,34 @@
 	</p>
 
 	<form method="post" use:enhance>
-		<div class="mb-6">
-			<Label for="password" class="mb-2">Password</Label>
-			<Input
-				type="password"
-				id="password"
-				name="password"
-				placeholder="•••••••••"
-				required
-				bind:value={$form.password}
-			/>
+		<Label for="password" class="mb-2">Password</Label>
+		<Input
+			type="password"
+			id="password"
+			name="password"
+			placeholder="•••••••••"
+			required
+			bind:value={$form.password}
+		/>
+		<Helper class="mb-6 mt-2" color="red">
 			{#if $errors.password}
-				<Helper class="mt-2" color="red">{$errors.password}</Helper>
+				{$errors.password}
 			{/if}
-		</div>
-		<div class="mb-6">
-			<Label for="confirm_password" class="mb-2">Confirm password</Label>
-			<Input
-				type="password"
-				id="confirm_password"
-				name="confirm_password"
-				placeholder="•••••••••"
-				required
-				bind:value={$form.confirm_password}
-			/>
+		</Helper>
+		<Label for="confirm_password" class="mb-2">Confirm password</Label>
+		<Input
+			type="password"
+			id="confirm_password"
+			name="confirm_password"
+			placeholder="•••••••••"
+			required
+			bind:value={$form.confirm_password}
+		/>
+		<Helper class="mb-6 mt-2" color="red">
 			{#if $errors.confirm_password}
-				<Helper class="mt-2" color="red">{$errors.confirm_password}</Helper>
+				{$errors.confirm_password}
 			{/if}
-		</div>
+		</Helper>
 		<Button type="submit">Submit</Button>
 	</form>
 </Card>
