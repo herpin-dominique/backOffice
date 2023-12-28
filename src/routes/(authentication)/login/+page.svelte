@@ -5,7 +5,6 @@
 	export let data;
 
 	const { form, errors, enhance } = superForm(data.form);
-	$: console.log($errors.session);
 </script>
 
 <Card class="mx-auto mt-12" size="md">
