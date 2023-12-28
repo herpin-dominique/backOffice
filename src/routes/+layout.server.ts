@@ -1,3 +1,6 @@
-export async function load({ locals }) {
-	return { session: locals.session };
+export async function load({ locals, depends }) {
+	depends('root-layout');
+	const { session } = locals;
+
+	return { session };
 }
