@@ -1,8 +1,6 @@
 import { auth, AuthError, type Session } from '$lib/server/authentication/lucia.js';
-import { passwordValidation } from '$lib/server/users';
 import { fail, redirect } from '@sveltejs/kit';
-import path from 'path';
-import { message, superValidate } from 'sveltekit-superforms/server';
+import { superValidate } from 'sveltekit-superforms/server';
 import { z } from 'zod';
 
 const loginSchema = z
