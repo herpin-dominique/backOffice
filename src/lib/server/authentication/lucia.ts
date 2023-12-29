@@ -1,15 +1,11 @@
 import { lucia } from 'lucia';
 import { sveltekit } from 'lucia/middleware';
-import { pg, postgres } from '@lucia-auth/adapter-postgresql';
-import { db } from '@vercel/postgres';
-import { AuthenticationTables, postgresSql as sql } from '$lib/server/database';
-import { POSTGRES_HOST } from '$env/static/private';
+import { postgres } from '@lucia-auth/adapter-postgresql';
+import { AuthenticationTables, sql } from '$lib/server/database';
 
 export const auth = lucia({
 	env: import.meta.env.PROD ? 'PROD' : 'DEV',
-	adapter: POSTGRES_HOST.match(/localhost/i)
-		? postgres(sql, AuthenticationTables)
-		: pg(db, AuthenticationTables),
+	adapter: postgres(sql, AuthenticationTables),
 	middleware: sveltekit(),
 	getUserAttributes: (databaseUser) => {
 		return {
