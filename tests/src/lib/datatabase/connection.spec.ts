@@ -1,4 +1,4 @@
-import { sql } from '$lib/server/database';
+import { sql, sqlTables } from '$lib/server/database';
 
 describe('connectivity spec', () => {
 	it('should able to select text value', async () => {
@@ -19,5 +19,10 @@ describe('connectivity spec', () => {
 		expect(rows).toContainEqual({ tablename: 'dev_bo_user' });
 		expect(rows).toContainEqual({ tablename: 'dev_bo_user_key' });
 		expect(rows).toContainEqual({ tablename: 'dev_bo_user_session' });
+	});
+
+	it('should able to describe table', async () => {
+		const rows = await sql`select count(*) from ${sqlTables.user}`;
+		expect(rows[0]).toHaveProperty('count');
 	});
 });

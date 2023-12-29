@@ -1,4 +1,4 @@
-import { UserTables, sql } from '$lib/server/database';
+import { sql, sqlTables } from '$lib/server/database';
 import { auth } from '$lib/server/authentication';
 import { z } from 'zod';
 import { NewRegistrationSchema } from '.';
@@ -28,9 +28,6 @@ export async function createBackofficeUser({
 		},
 		attributes: {}
 	});
-
-	const userProfileTable = sql(UserTables.userProfile);
-
-	await sql`INSERT INTO ${userProfileTable} (email, firstname, lastname, phone, user_id)
+	await sql`INSERT INTO ${sqlTables.userProfile} (email, firstname, lastname, phone, user_id)
                   VALUES (${email}, ${firstname}, ${lastname}, ${phone}, ${userId})`;
 }
