@@ -14,12 +14,12 @@ export const UserTables = {
 export function generateUserTablesDDL() {
 	return `
         CREATE TABLE ${UserTables.userProfile} (
-            id TEXT NOT NULL PRIMARY KEY,
+            id SERIAL PRIMARY KEY,
             email TEXT UNIQUE NOT NULL,
             firstname TEXT NOT NULL,
             lastname TEXT NOT NULL,
             phone TEXT NOT NULL,
-            user_id TEXT NOT NULL REFERENCES ${AuthenticationTables.user}(id)
+            user_id TEXT NOT NULL REFERENCES ${AuthenticationTables.user}(id) ON DELETE CASCADE
         );
     `;
 }

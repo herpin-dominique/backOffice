@@ -25,13 +25,13 @@ export function generateAuthentationTablesDDL() {
 
         CREATE TABLE ${AuthenticationTables.key} (
             id TEXT NOT NULL PRIMARY KEY,
-            user_id TEXT NOT NULL REFERENCES ${AuthenticationTables.user}(id),
+            user_id TEXT NOT NULL REFERENCES ${AuthenticationTables.user}(id) ON DELETE CASCADE,
             hashed_password TEXT
         );
             
         CREATE TABLE ${AuthenticationTables.session} (
             id TEXT NOT NULL PRIMARY KEY,
-            user_id TEXT NOT NULL REFERENCES ${AuthenticationTables.user}(id),
+            user_id TEXT NOT NULL REFERENCES ${AuthenticationTables.user}(id) ON DELETE CASCADE,
             active_expires BIGINT NOT NULL,
             idle_expires BIGINT NOT NULL
         );
