@@ -48,6 +48,8 @@
 				{/each}
 			</TableBody>
 		</Table>
+	{:else}
+		<p class="self-center">no user</p>
 	{/if}
 </div>
 
