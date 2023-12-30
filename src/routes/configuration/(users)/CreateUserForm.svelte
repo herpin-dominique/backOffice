@@ -11,7 +11,7 @@
 	const { form, errors, enhance } = superForm(formData, {
 		resetForm: true,
 		onUpdated: ({ form }) => {
-			dispatch('updated', form.message);
+			if (form.message !== undefined) dispatch('updated', form.message);
 		}
 	});
 </script>
