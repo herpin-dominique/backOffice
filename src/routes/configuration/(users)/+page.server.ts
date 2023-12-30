@@ -1,12 +1,17 @@
 import { AuthError } from '$lib/server/authentication/lucia.js';
-import { NewBackofficeUserSchema, createBackofficeUser } from '$lib/server/users';
+import {
+	NewBackofficeUserSchema,
+	createBackofficeUser,
+	listBackofficeUser
+} from '$lib/server/users';
 import { fail } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms/server';
 
 export async function load() {
 	const createUserForm = await superValidate(NewBackofficeUserSchema);
+	const users = await listBackofficeUser();
 
-	return { createUserForm };
+	return { createUserForm, users };
 }
 
 export const actions = {
