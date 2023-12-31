@@ -11,14 +11,14 @@
 		"test:unit": "vitest --config vitest.config.unit.ts",
 		"test:integration": "vitest --mode development --config vitest.config.integration.ts ",
 		"test:browser": "playwright test",
-		"db:create-scripts-dev": "vite-node --mode development src-database/index.ts create-sql-scripts",
-		"db:create-scripts-prd": "vite-node --mode production src-database/index.ts create-sql-scripts",
-		"db:create-docker-image": "npm run db:create-scripts-dev && vite-node src-database/index.ts create-docker-image",
+		"db:create-scripts-dev": "vite-node --config vite.config.database.ts --mode development src-database/index.ts create-sql-scripts",
+		"db:create-scripts-prd": "vite-node --config vite.config.database.ts --mode production src-database/index.ts create-sql-scripts",
+		"db:create-docker-image": "npm run db:create-scripts-dev && vite-node --config vite.config.database.ts src-database/index.ts create-docker-image",
 		"db:start": "docker run --rm --name snd-backoffice-db-dev --env-file ./.env.development.local -p 5432:5432 -d snd-backoffice-db-dev",
 		"db:stop": "docker stop snd-backoffice-db-dev",
 		"db:restart": "npm run db:stop && npm run db:start",
-		"db:drop-tables": "vite-node --mode production src-database/index.ts drop-tables",
-		"db:create-tables": "vite-node --mode production src-database/index.ts create-tables"
+		"db:drop-tables": "vite-node --config vite.config.database.ts --mode production src-database/index.ts drop-tables",
+		"db:create-tables": "npm run db:create-scripts-prd && vite-node --config vite.config.database.ts --mode production src-database/index.ts create-tables"
 	},
 	"devDependencies": {
 		"@lucia-auth/adapter-postgresql": "^2.0.2",

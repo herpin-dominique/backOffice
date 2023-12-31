@@ -1,6 +1,6 @@
 import { buildImage } from './docker-build';
 import { generateSqlScripts } from './generate';
-import { createTables, dropTables } from './vercel/drop-tables';
+import { createTables, dropTables } from './vercel';
 
 /**
  * Task resolution mapper
@@ -18,9 +18,12 @@ const command = process.argv[process.argv.length - 1];
  */
 try {
 	await tasks[command]();
+	console.log('task finished.');
+	process.exit();
 } catch (e) {
 	if (e.message === 'tasks[command] is not a function') {
 		console.error(`unknown command: ${command}`);
 		console.error(`expected one of: ${Object.keys(tasks)}`);
 	} else console.error(e);
+	process.exit(16);
 }

@@ -15,8 +15,9 @@ export async function generateSqlScripts() {
 	};
 
 	// create a file for each DDL key in sql script directory
-	Object.keys(ddl).forEach(async (key) => {
-		const data = (await formatSQL(ddl[key])) || '';
+	for (const [key, value] of Object.entries(ddl)) {
+		const data = (await formatSQL(value)) || '';
 		fs.writeFileSync(`${scriptDir}/${key}.sql`, data);
-	});
+		console.log(`generated: ${scriptDir}/${key}.sql`);
+	}
 }

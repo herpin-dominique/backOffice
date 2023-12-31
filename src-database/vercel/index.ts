@@ -1,1 +1,1 @@
-export * from './drop-tables';
+export * from './tables';
