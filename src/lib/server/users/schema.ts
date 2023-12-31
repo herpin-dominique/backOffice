@@ -30,18 +30,18 @@ export const UserProfileSchema = z.object({
 	})
 });
 
-export const NewRegistrationSchema = UserProfileSchema.omit({
+export const NewUserSchema = UserProfileSchema.omit({
 	id: true,
 	createAt: true
 }).extend({
-	password: z.string().min(8).superRefine(passwordValidation)
+	password: z.union([z.null(), z.string().min(8).superRefine(passwordValidation)]).optional()
 });
 
 export const UpdateUserProfileSchema = UserProfileSchema.omit({
 	id: true
 }).partial();
 
-export type NewRegistration = z.infer<typeof NewRegistrationSchema>;
+export type NewUser = z.infer<typeof NewUserSchema>;
 
 export type UpdateUserProfile = z.infer<typeof UpdateUserProfileSchema>;
 

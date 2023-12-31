@@ -5,7 +5,7 @@ const randUser = (): NewUser => ({
 	email: randEmail(),
 	firstname: randFirstName(),
 	lastname: randLastName(),
-	phone: randPhoneNumber({ countryCode: 'FR' })
+	phone: '+33 01 23 45 67 89'
 });
 
 describe('Users spec', () => {

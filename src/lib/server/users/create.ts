@@ -1,13 +1,7 @@
 import { sql, sqlTables } from '$lib/server/database';
 import { auth } from '$lib/server/authentication';
 import { z } from 'zod';
-import { NewRegistrationSchema, type ProviderNames } from '.';
-
-export const NewUserSchema = NewRegistrationSchema.omit({
-	password: true
-});
-
-export type NewUser = z.infer<typeof NewUserSchema>;
+import type { NewUser, ProviderNames } from '.';
 
 /**
  * Create backoffice user :

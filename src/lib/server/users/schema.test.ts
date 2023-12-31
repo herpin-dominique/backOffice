@@ -1,4 +1,4 @@
-import { NewRegistrationSchema, type NewRegistration } from './schema';
+import { NewUserSchema, type NewUser } from './schema';
 
 describe('User Registration validation', () => {
 	const validRegistrationData = {
@@ -10,12 +10,12 @@ describe('User Registration validation', () => {
 	};
 
 	it('should have no errors with valid data', () => {
-		const validation = NewRegistrationSchema.safeParse(validRegistrationData);
+		const validation = NewUserSchema.safeParse(validRegistrationData);
 		expect(validation.success).toBe(true);
 	});
 
 	it('should have errors with invalid email data', () => {
-		const validation = NewRegistrationSchema.safeParse({ ...validRegistrationData, email: '' });
+		const validation = NewUserSchema.safeParse({ ...validRegistrationData, email: '' });
 		expect(validation.success).toBe(false);
 
 		// typescript discriminated union
@@ -27,7 +27,7 @@ describe('User Registration validation', () => {
 	});
 
 	it('should have error with invalid password complexity', () => {
-		const validation = NewRegistrationSchema.safeParse({ ...validRegistrationData, password: '' });
+		const validation = NewUserSchema.safeParse({ ...validRegistrationData, password: '' });
 		expect(validation.success).toBe(false);
 
 		// typescript discriminated union
@@ -44,7 +44,7 @@ describe('User Registration validation', () => {
 	});
 
 	it('should have errors with empty names', () => {
-		const validation = NewRegistrationSchema.safeParse({
+		const validation = NewUserSchema.safeParse({
 			...validRegistrationData,
 			firstname: '',
 			lastname: ''
