@@ -1,12 +1,13 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
-import baseConfig from './vitest.config';
-import { sveltekit } from '@sveltejs/kit/vite';
+import baseConfig from './vite.config';
 
 export default mergeConfig(
 	baseConfig({ mode: 'development' }),
 	defineConfig({
-		plugins: [sveltekit()],
 		test: {
+			globals: true,
+			environment: 'jsdom',
+			setupFiles: ['./vitest-setup.ts'],
 			include: ['tests/**/*.spec.ts']
 		}
 	})

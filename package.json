@@ -22,6 +22,7 @@
 	},
 	"devDependencies": {
 		"@lucia-auth/adapter-postgresql": "^2.0.2",
+		"@ngneat/falso": "^7.1.1",
 		"@playwright/test": "^1.40.1",
 		"@sveltejs/adapter-auto": "^3.0.1",
 		"@sveltejs/adapter-vercel": "^4.0.3",
@@ -29,6 +30,7 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@testing-library/jest-dom": "^6.1.6",
 		"@testing-library/svelte": "^4.0.5",
+		"@types/lodash": "^4.14.202",
 		"@types/node": "^20.10.6",
 		"@vitest/ui": "^1.1.0",
 		"autoprefixer": "^10.4.16",
@@ -37,6 +39,7 @@
 		"flowbite-svelte-icons": "^0.4.5",
 		"jsdom": "^23.0.1",
 		"libphonenumber-js": "^1.10.53",
+		"lodash": "^4.17.21",
 		"lucia": "^2.7.6",
 		"postcss": "^8.4.32",
 		"postcss-load-config": "^5.0.2",

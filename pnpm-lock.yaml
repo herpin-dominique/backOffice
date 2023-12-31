@@ -8,6 +8,9 @@ devDependencies:
   '@lucia-auth/adapter-postgresql':
     specifier: ^2.0.2
     version: 2.0.2(lucia@2.7.6)(postgres@3.4.3)
+  '@ngneat/falso':
+    specifier: ^7.1.1
+    version: 7.1.1
   '@playwright/test':
     specifier: ^1.40.1
     version: 1.40.1
@@ -29,6 +32,9 @@ devDependencies:
   '@testing-library/svelte':
     specifier: ^4.0.5
     version: 4.0.5(svelte@4.2.8)
+  '@types/lodash':
+    specifier: ^4.14.202
+    version: 4.14.202
   '@types/node':
     specifier: ^20.10.6
     version: 20.10.6
@@ -53,6 +59,9 @@ devDependencies:
   libphonenumber-js:
     specifier: ^1.10.53
     version: 1.10.53
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   lucia:
     specifier: ^2.7.6
     version: 2.7.6
@@ -466,6 +475,13 @@ packages:
       - supports-color
     dev: true
 
+  /@ngneat/falso@7.1.1:
+    resolution: {integrity: sha512-/5HuJDaZHXl3WVdgvYBAM52OSYbSKfiNazVOZOw/3KjeZ6dQW9F0QCG+W6z52lUu5MZvp/TkPGaVRtoz6h9T1w==}
+    dependencies:
+      seedrandom: 3.0.5
+      uuid: 8.3.2
+    dev: true
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -773,6 +789,10 @@ packages:
 
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+    dev: true
+
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
   /@types/node@20.10.6:
@@ -2966,6 +2986,10 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
+  /seedrandom@3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+    dev: true
+
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -3525,6 +3549,11 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: true
+
+  /uuid@8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
     dev: true
 
   /vite-node@1.1.0(@types/node@20.10.6):
