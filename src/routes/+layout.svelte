@@ -16,7 +16,6 @@
 	import { UserOutline } from 'flowbite-svelte-icons';
 	import Logout from './(authentication)/logout/Logout.svelte';
 	export let data;
-	export let form;
 
 	$: username = data.session?.user.userId;
 </script>
@@ -40,7 +39,7 @@
 				<Dropdown class="w-40">
 					<DropdownItem><a href="/profile">Profile</a></DropdownItem>
 					<DropdownDivider />
-					<DropdownItem><Logout {form} /></DropdownItem>
+					<DropdownItem><Logout /></DropdownItem>
 				</Dropdown>
 			{/if}
 		</div>

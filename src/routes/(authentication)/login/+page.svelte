@@ -4,7 +4,12 @@
 	import * as Icon from 'flowbite-svelte-icons';
 	export let data;
 
-	const { form, errors, enhance } = superForm(data.form);
+	let loginBtnLabel = 'Log in';
+	const setLoginBtnLabel = (label: string) => () => (loginBtnLabel = label);
+	const { form, errors, enhance } = superForm(data.form, {
+		onResult: setLoginBtnLabel('Log in'),
+		onSubmit: setLoginBtnLabel('Loging in...')
+	});
 </script>
 
 <Card class="mx-auto mt-12" size="md">
@@ -30,6 +35,6 @@
 				{$errors.session}
 			{/if}
 		</Helper>
-		<Button class="mr-auto" type="submit">Log in</Button>
+		<Button class="mr-auto" type="submit">{loginBtnLabel}</Button>
 	</form>
 </Card>

@@ -1,7 +1,6 @@
 <script>
 	import { applyAction, enhance } from '$app/forms';
 	import { navigating } from '$app/stores';
-	export let form;
 	let submiting = false;
 </script>
 
