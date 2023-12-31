@@ -1,26 +1,22 @@
 import { AuthError } from '$lib/server/authentication/lucia.js';
-import {
-	NewBackofficeUserSchema,
-	createBackofficeUser,
-	listBackofficeUser
-} from '$lib/server/users';
+import { NewUserSchema, createUser, listUser } from '$lib/server/users';
 import { fail } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms/server';
 
 export async function load() {
-	const createUserForm = await superValidate(NewBackofficeUserSchema);
-	const users = await listBackofficeUser();
+	const createUserForm = await superValidate(NewUserSchema);
+	const users = await listUser('backoffice');
 
 	return { createUserForm, users };
 }
 
 export const actions = {
 	'create-user': async ({ request }) => {
-		const form = await superValidate(request, NewBackofficeUserSchema);
+		const form = await superValidate(request, NewUserSchema);
 		if (!form.valid) return fail(400, { createUserForm: form });
 
 		try {
-			await createBackofficeUser(form.data);
+			await createUser('backoffice', form.data);
 			return message(form, 'New user created.');
 		} catch (e) {
 			if (e instanceof AuthError && e.message === 'AUTH_DUPLICATE_KEY_ID') {

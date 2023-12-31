@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
+export type ProviderNames = 'backoffice' | 'vitrine';
+
 const parseDate = (value: unknown) => {
 	if (!(typeof value === 'string' || value instanceof Date)) return undefined;
 	const date = new Date(value);
