@@ -1,4 +1,5 @@
 <script>
+	import DeleteButton from './DeleteButton.svelte';
 	import {
 		ButtonGroup,
 		Button,
@@ -9,8 +10,8 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
-	import { UserAddOutline } from 'flowbite-svelte-icons';
-	import CreateUserForm from './CreateUserForm.svelte';
+	import { UserAddOutline, TrashBinOutline } from 'flowbite-svelte-icons';
+	import CreateForm from './CreateForm.svelte';
 	import PopupMessage from './PopupMessage.svelte';
 	export let data;
 
@@ -34,6 +35,9 @@
 				<TableHeadCell>firstname</TableHeadCell>
 				<TableHeadCell>lastname</TableHeadCell>
 				<TableHeadCell>phone</TableHeadCell>
+				<TableHeadCell>
+					<span class="sr-only">actions</span>
+				</TableHeadCell>
 			</TableHead>
 
 			<TableBody tableBodyClass="divide-y">
@@ -44,6 +48,11 @@
 						<TableBodyCell>{user.firstname}</TableBodyCell>
 						<TableBodyCell>{user.lastname}</TableBodyCell>
 						<TableBodyCell>{user.phone}</TableBodyCell>
+						<TableBodyCell>
+							<ButtonGroup>
+								<DeleteButton {user} formData={data.userActionsForm} />
+							</ButtonGroup>
+						</TableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
@@ -53,7 +62,7 @@
 	{/if}
 </div>
 
-<CreateUserForm
+<CreateForm
 	formData={data.createUserForm}
 	open={createUserModal}
 	on:updated={({ detail }) => {

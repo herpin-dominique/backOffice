@@ -2,13 +2,15 @@
 	import { Button, Modal, Label, Input, Helper } from 'flowbite-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { superForm } from 'sveltekit-superforms/client';
+	import type { PageData } from './$types';
 
-	export let formData;
+	export let formData: PageData['createUserForm'];
 	export let open: boolean;
 
 	const dispatch = createEventDispatcher();
 
 	const { form, errors, enhance } = superForm(formData, {
+		taintedMessage: null,
 		resetForm: true,
 		onUpdated: ({ form }) => {
 			if (form.message !== undefined) dispatch('updated', form.message);
