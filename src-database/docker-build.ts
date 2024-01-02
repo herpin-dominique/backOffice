@@ -1,15 +1,15 @@
-import { exec } from 'child_process';
+import { exec, spawn } from 'child_process';
 import { randomBytes } from 'crypto';
 import fs from 'fs';
 
-function execAsync(command: string) {
+function execute(command: string) {
 	return new Promise((resolve, reject) => {
-		exec(command, (error, stdout, stderr) => {
-			if (error) {
-				reject({ error, stderr });
-			} else {
-				resolve(stdout);
-			}
+		const [docker, ...args] = command.split(' ');
+		const job = spawn(docker, args);
+		job.stdout.pipe(process.stdout);
+		job.stderr.pipe(process.stderr);
+		job.on('exit', (code) => {
+			resolve(code);
 		});
 	});
 }
@@ -22,7 +22,8 @@ export async function buildImage() {
 
 	// build new docker image
 	const dockerFile = 'src-database';
-	await execAsync(`docker build -t snd-backoffice-db-dev:latest ${dockerFile}`);
+	await execute(`docker build -t snd-backoffice-db-dev:latest ${dockerFile}`);
+	await execute('docker image prune --force');
 
 	console.log('docker image built.');
 }
