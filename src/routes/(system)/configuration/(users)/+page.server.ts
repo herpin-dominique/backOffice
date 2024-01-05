@@ -33,10 +33,10 @@ export const actions = {
 
 		try {
 			await createUser('backoffice', form.data);
-			return message(form, 'New user created.');
+			return message(form, `User "${form.data.email}" created.`);
 		} catch (e) {
 			if (e instanceof AuthError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
-				return message(form, 'User already exist.');
+				return message(form, `User "${form.data.email}" already exist.`);
 			}
 			console.error(e);
 			return message(form, 'An error occured.');
@@ -48,7 +48,8 @@ export const actions = {
 		if (!form.valid) return fail(400, { deleteForm: form });
 
 		await deleteUser('backoffice', form.data.email);
+		console.log({ delete: form.data.email });
 
-		return message(form, 'User deleted');
+		return message(form, `User with email "${form.data.email}" deleted`);
 	}
 };

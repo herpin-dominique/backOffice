@@ -13,7 +13,7 @@
 		taintedMessage: null,
 		resetForm: true,
 		onUpdated: ({ form }) => {
-			if (form.message !== undefined) dispatch('updated', form.message);
+			if (form.message !== undefined) dispatch('message', form.message);
 		}
 	});
 </script>

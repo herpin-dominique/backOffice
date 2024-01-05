@@ -1,18 +1,9 @@
 <script>
-	import DeleteButton from './DeleteButton.svelte';
-	import {
-		ButtonGroup,
-		Button,
-		Table,
-		TableBody,
-		TableBodyCell,
-		TableBodyRow,
-		TableHead,
-		TableHeadCell
-	} from 'flowbite-svelte';
-	import { UserAddOutline, TrashBinOutline } from 'flowbite-svelte-icons';
-	import CreateForm from './CreateForm.svelte';
+	import { ButtonGroup, Button } from 'flowbite-svelte';
+	import { UserAddOutline } from 'flowbite-svelte-icons';
+	import CreateUser from './CreateUser.svelte';
 	import PopupMessage from './PopupMessage.svelte';
+	import UserTable from './UserTable.svelte';
 	export let data;
 
 	let createUserModal = false;
@@ -27,45 +18,19 @@
 		</Button>
 	</ButtonGroup>
 
-	{#if data.users.length > 0}
-		<Table>
-			<TableHead>
-				<TableHeadCell>created at</TableHeadCell>
-				<TableHeadCell>email</TableHeadCell>
-				<TableHeadCell>firstname</TableHeadCell>
-				<TableHeadCell>lastname</TableHeadCell>
-				<TableHeadCell>phone</TableHeadCell>
-				<TableHeadCell>
-					<span class="sr-only">actions</span>
-				</TableHeadCell>
-			</TableHead>
-
-			<TableBody tableBodyClass="divide-y">
-				{#each data.users as user}
-					<TableBodyRow>
-						<TableBodyCell>{user.createAt.toDateString()}</TableBodyCell>
-						<TableBodyCell>{user.email}</TableBodyCell>
-						<TableBodyCell>{user.firstname}</TableBodyCell>
-						<TableBodyCell>{user.lastname}</TableBodyCell>
-						<TableBodyCell>{user.phone}</TableBodyCell>
-						<TableBodyCell>
-							<ButtonGroup>
-								<DeleteButton {user} formData={data.userActionsForm} />
-							</ButtonGroup>
-						</TableBodyCell>
-					</TableBodyRow>
-				{/each}
-			</TableBody>
-		</Table>
-	{:else}
-		<p class="self-center">no user</p>
-	{/if}
+	<UserTable
+		users={data.users}
+		formData={data.userActionsForm}
+		on:message={({ detail }) => {
+			message = detail;
+		}}
+	/>
 </div>
 
-<CreateForm
-	formData={data.createUserForm}
+<CreateUser
+	formData={{ ...data.createUserForm }}
 	bind:open={createUserModal}
-	on:updated={({ detail }) => {
+	on:message={({ detail }) => {
 		message = detail;
 	}}
 />
