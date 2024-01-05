@@ -64,7 +64,7 @@
 
 <CreateForm
 	formData={data.createUserForm}
-	open={createUserModal}
+	bind:open={createUserModal}
 	on:updated={({ detail }) => {
 		message = detail;
 	}}
