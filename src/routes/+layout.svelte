@@ -15,13 +15,15 @@
 	} from 'flowbite-svelte';
 	import { UserOutline } from 'flowbite-svelte-icons';
 	import Logout from './(authentication)/logout/Logout.svelte';
+	import { goto } from '$app/navigation';
 	export let data;
 
 	$: username = data.session?.user.userId;
+	$: if (data.session === null && $page.url.pathname !== '/login') goto('/login');
 </script>
 
 <Navbar fluid>
-	<NavBrand href="/">
+	<NavBrand href={data.session === null ? '/login' : '/'}>
 		<img src="/logo.png" class="me-3 h-6 sm:h-9" alt="SND Logo" />
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
 			>SND Backoffice</span
