@@ -3,6 +3,14 @@
 	import { createEventDispatcher } from 'svelte';
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { PageData } from './$types';
+	import { randEmail, randFirstName, randLastName, randPhoneNumber } from '@ngneat/falso';
+	import type { NewUser } from '$lib/server/users';
+	const randUser = (): NewUser => ({
+		email: randEmail(),
+		firstname: randFirstName(),
+		lastname: randLastName(),
+		phone: '+33 01 23 45 67 89'
+	});
 
 	export let formData: PageData['createUserForm'];
 	export let open: boolean;
@@ -58,6 +66,11 @@
 			</Helper>
 		</Label>
 
+		<Button
+			on:click={() => {
+				$form = randUser();
+			}}>Random</Button
+		>
 		<Button type="submit" class="w-full1" formaction="?/create-user">Create</Button>
 	</form>
 </Modal>

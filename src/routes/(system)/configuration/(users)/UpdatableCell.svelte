@@ -55,12 +55,12 @@
 <div class="flex justify-end" tabindex="0" role="cell" on:dblclick={edit}>
 	<Input
 		type="text"
-		class={editing ? 'mr-auto h-7 w-64' : 'hidden'}
+		class={editing ? 'mr-auto h-7' : 'hidden'}
 		bind:value
 		formAction="?/update-user"
 		on:keypress={confirm}
 	/>
-	<span class={editing ? 'hidden' : 'mr-auto h-7 w-64'}>{value}</span>
+	<span class={editing ? 'hidden' : 'mr-auto h-7'}>{value}</span>
 	<Button
 		aria-label="confirm"
 		class={editing ? 'ml-2' : 'ml-2 hidden'}

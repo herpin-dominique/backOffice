@@ -1,4 +1,4 @@
-import { UserProfileSchema, type UserProfile, type ProviderNames } from '.';
+import { UserProfileSchema, type ProviderNames } from '.';
 import { sql, sqlTables } from '../database';
 
 export async function listUser(providerId: ProviderNames) {

@@ -1,7 +1,7 @@
 import { createUser, deleteUser, listUser, type NewUser } from '$lib/server/users';
 import { randEmail, randFirstName, randLastName, randPhoneNumber } from '@ngneat/falso';
 
-const randUser = (): NewUser => ({
+export const randUser = (): NewUser => ({
 	email: randEmail(),
 	firstname: randFirstName(),
 	lastname: randLastName(),

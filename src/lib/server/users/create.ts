@@ -1,6 +1,5 @@
 import { sql, sqlTables } from '$lib/server/database';
 import { auth } from '$lib/server/authentication';
-import { z } from 'zod';
 import type { NewUser, ProviderNames } from '.';
 
 /**
@@ -10,13 +9,13 @@ import type { NewUser, ProviderNames } from '.';
  */
 export async function createUser(
 	providerId: ProviderNames,
-	{ email, firstname, lastname, phone }: NewUser
+	{ email, firstname, lastname, phone, password }: NewUser
 ) {
 	const { userId } = await auth.createUser({
 		key: {
-			providerId: 'backoffice',
+			providerId,
 			providerUserId: email.toLowerCase(),
-			password: null
+			password: password || null
 		},
 		attributes: {}
 	});

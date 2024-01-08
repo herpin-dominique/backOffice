@@ -56,6 +56,7 @@ export const actions = {
 		if (!form.valid) return fail(400, { updateForm: form });
 
 		await updateUser(form.data);
+		console.log({ update: form.data });
 
 		return { form };
 	}

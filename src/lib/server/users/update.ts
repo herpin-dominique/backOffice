@@ -18,12 +18,7 @@ export async function updateUser(profile: UpdateUserProfile) {
 
 	const update = sql(cleanProfile, ...keys);
 
-	console.log({ update });
-
-	const result = await sql`update ${sqlTables.userProfile} set ${update}
+	await sql`update ${sqlTables.userProfile} set ${update}
         where user_id = ${cleanProfile.id}
-        RETURNING *
     `;
-
-	console.log({ result });
 }
