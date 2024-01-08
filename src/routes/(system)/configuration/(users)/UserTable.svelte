@@ -14,28 +14,55 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import { createEventDispatcher } from 'svelte';
 	import { TrashBinOutline } from 'flowbite-svelte-icons';
+	import UpdatableCell, { type UpdatableCellEvents } from './UpdatableCell.svelte';
 	export let users: UserProfile[];
 	export let formData: PageData['userActionsForm'];
 
 	const dispatch = createEventDispatcher();
 
-	const { form, errors, enhance } = superForm(formData, {
+	// Superform setup
+	const { form, enhance } = superForm(formData, {
 		taintedMessage: null,
-		resetForm: true,
+		resetForm: false,
 		onUpdated: ({ form }) => {
 			if (form.message !== undefined) dispatch('message', form.message);
 		}
 	});
 
-	function setEmail(value: string) {
-		return () => {
-			$form.email = value;
-		};
+	// update form data as hidden values
+	type FormDataBase = Record<keyof typeof $form, any>;
+	type FormData = Pick<FormDataBase, 'id'> & Partial<Omit<FormDataBase, 'id'>>;
+	function setFormData(data: FormData) {
+		$form = { ...data };
+	}
+
+	// update user data
+	function updateUser(event: CustomEvent<UpdatableCellEvents['confirm']>) {
+		setFormData({
+			id: event.detail.id,
+			[event.detail.property]: event.detail.value
+		});
+
+		console.log({ form: $form });
 	}
 </script>
 
 {#if users.length > 0}
 	<form method="post" use:enhance>
+		<input type="hidden" name="id" bind:value={$form.id} />
+		{#if $form.email}
+			<input type="hidden" name="email" bind:value={$form.email} />
+		{/if}
+		{#if $form.firstname}
+			<input type="hidden" name="firstname" bind:value={$form.firstname} />
+		{/if}
+		{#if $form.lastname}
+			<input type="hidden" name="lastname" bind:value={$form.lastname} />
+		{/if}
+		{#if $form.phone}
+			<input type="hidden" name="phone" bind:value={$form.phone} />
+		{/if}
+
 		<Table>
 			<TableHead>
 				<TableHeadCell>created at</TableHeadCell>
@@ -52,21 +79,28 @@
 				{#each users as user}
 					<TableBodyRow>
 						<TableBodyCell>{user.createAt.toDateString()}</TableBodyCell>
-						<TableBodyCell>{user.email}</TableBodyCell>
-						<TableBodyCell>{user.firstname}</TableBodyCell>
-						<TableBodyCell>{user.lastname}</TableBodyCell>
-						<TableBodyCell>{user.phone}</TableBodyCell>
 						<TableBodyCell>
-							<input type="hidden" name="email" bind:value={$form.email} />
+							<UpdatableCell data={{ property: 'email', user }} on:confirm={updateUser} />
+						</TableBodyCell>
+						<TableBodyCell>
+							<UpdatableCell data={{ property: 'firstname', user }} on:confirm={updateUser} />
+						</TableBodyCell>
+						<TableBodyCell>
+							<UpdatableCell data={{ property: 'lastname', user }} on:confirm={updateUser} />
+						</TableBodyCell>
+						<TableBodyCell>
+							<UpdatableCell data={{ property: 'phone', user }} on:confirm={updateUser} />
+						</TableBodyCell>
+						<TableBodyCell>
 							<ButtonGroup>
 								<Button
 									outline
 									color="dark"
 									type="submit"
 									formAction="?/delete-user"
-									on:click={setEmail(user.email)}
+									on:click={() => setFormData({ id: user.id, email: user.email })}
 								>
-									<TrashBinOutline class="me-2 h-3 w-3" />
+									<TrashBinOutline class="me-2 h-3 w-3" v />
 								</Button>
 							</ButtonGroup>
 						</TableBodyCell>
